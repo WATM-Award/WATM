@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泰安发射电台 | Tai'an Active Stations</title>
+    <style>
+        /* 复刻WCSA极简风格，与主页面/规则页统一 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+        }
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        /* 返回主页按钮 */
+        .back {
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .back:hover {
+            text-decoration: underline;
+        }
+        /* 标题样式 */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #666;
+        }
+        h1 .en {
+            font-size: 22px;
+            display: block;
+            margin-top: 10px;
+            font-weight: normal;
+            color: #666;
+        }
+        h2 {
+            font-size: 20px;
+            margin: 30px 0 15px;
+            color: #000;
+            text-align: center;
+        }
+        /* 呼号列表样式：分栏展示，清晰易读 */
+        .station-list {
+            max-width: 600px;
+            margin: 0 auto;
+            columns: 2;
+            gap: 20px;
+            list-style: none;
+            text-align: center;
+        }
+        .station-list li {
+            margin-bottom: 8px;
+            font-size: 18px;
+            font-family: "Courier New", monospace; /* 等宽字体，适配呼号显示 */
+        }
+        /* 说明文本 */
+        .note {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #666;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* 手机端适配：单栏显示 */
+        @media (max-width: 600px) {
+            .station-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回主页按钮 -->
+    <a href="../" class="back">← 返回主页 | Back to Home</a>
+
+    <!-- 页面标题 -->
+    <h1>
+        最近泰安有发射的电台
+        <span class="en">Recently Active Stations in Tai'an</span>
+    </h1>
+
+    <!-- 呼号列表 -->
+    <h2>电台呼号 | Station Call Signs</h2>
+    <ul class="station-list">
+        <li>BA4IHB</li>
+        <li>BA4III</li>
+        <li>BA4JAE</li>
+        <li>BA4JBN</li>
+        <li>BA4JBU</li>
+        <li>BA4JFO</li>
+        <li>BA4JUN</li>
+        <li>BD4JK</li>
+        <li>BD4LG</li>
+        <li>BD4NW</li>
+        <li>BG4PO</li>
+        <li>BG4JUR</li>
+        <li>BG4JUS</li>
+        <li>BG4JUT</li>
+        <li>BG4JUV</li>
+        <li>BG4LZM</li>
+        <li>BG4LZN</li>
+        <li>BG4LZO</li>
+        <li>BG4LTZ</li>
+        <li>BG4LZV</li>
+        <li>BH4OBW</li>
+        <li>BI4WX</li>
+        <li>BI4XA</li>
+        <li>BI4KW</li>
+        <li>BI4WG</li>
+        <li>BL4HS</li>
+        <li>BL4QH</li>
+        <li>BN4CA</li>
+        <li>BI4PID</li>
+        <li>BI4PIH</li>
+        <li>BI4PUM</li>
+    </ul>
+
+    <!-- 说明文本 -->
+    <div class="note">
+        <p>注：列表实时更新，包含近期在泰安地区有发射记录的业余电台呼号，如有遗漏请发送电子邮件至watmham@outlook.com</p>
+        <p class="en">Note: This list is updated in real time, including call signs of amateur stations with recent transmission records in Tai'an</p>
+    </div>
+
+    <!-- 版权声明 -->
+    <div class="copyright">
+        © 2026 WATM 通联泰安全模式奖 | 联系邮箱：<a href="mailto:watmham@outlook.com">watmham@outlook.com</a>
+    </div>
+</body>
+</html>
