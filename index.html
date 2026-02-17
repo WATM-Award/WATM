@@ -11,7 +11,6 @@
             box-sizing: border-box;
             font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
         }
-        /* 核心：背景图+遮罩，确保显示且文字清晰 */
         body {
             max-width: 1000px;
             margin: 0 auto;
@@ -19,14 +18,14 @@
             text-align: center;
             color: #333;
             line-height: 1.8;
-            /* 使用公共CDN背景图（泰山+无线电元素，适配WATM主题） */
-            background: url("https://github.com/watmham/WATM/blob/main/images/bg2.png") no-repeat center center;
-            background-size: cover;    /* 自适应页面，不变形 */
-            background-attachment: fixed; /* 滚动时背景固定 */
-            background-color: #f8f8f8; /* 备用底色 */
-            position: relative;        /* 遮罩必备 */
+            /* 关键修复：使用GitHub Pages的Raw CDN地址（不是blob/仓库地址） */
+            background: url("https://raw.githubusercontent.com/watmham/WATM/main/images/bg2.png") no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #f8f8f8;
+            position: relative;
         }
-        /* 半透明遮罩：解决文字和背景图重叠看不清的问题 */
+        /* 遮罩确保文字清晰 */
         body::before {
             content: "";
             position: absolute;
@@ -34,16 +33,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9); /* 透明度0.9，文字更清晰 */
-            z-index: -1; /* 遮罩在文字下方，不遮挡内容 */
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
-        /* 标题样式 */
         h1 {
             font-size: 28px;
             margin-bottom: 40px;
             padding-bottom: 15px;
             border-bottom: 1px solid #666;
-            color: #2c3e50; /* 深文字色，适配背景 */
         }
         h1 .en {
             font-size: 22px;
@@ -52,13 +49,10 @@
             font-weight: normal;
             color: #666;
         }
-        /* 简介样式 */
         .intro {
             font-size: 18px;
             margin-bottom: 50px;
-            color: #34495e;
         }
-        /* 按钮组：下载+规则导航 */
         .btn-group {
             margin: 20px 0;
         }
@@ -69,43 +63,32 @@
             border-radius: 5px;
             font-size: 18px;
             text-decoration: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 轻微阴影，更醒目 */
         }
-        /* 规则按钮样式 */
         .nav-btn {
             background: #f5f5f5;
             border: 1px solid #ccc;
             color: #000;
         }
-        /* 下载按钮样式（突出显示） */
         .download-btn {
             background: #3498db;
             border: 1px solid #2980b9;
             color: #fff;
             font-weight: bold;
         }
-        /* 按钮hover效果 */
-        .nav-btn:hover {
+        .nav-btn:hover, .download-btn:hover {
             background: #eee;
             text-decoration: underline;
         }
-        .download-btn:hover {
-            background: #2980b9;
-            text-decoration: none;
-        }
-        /* 下载提示 */
         .download-tip {
             font-size: 14px;
             color: #666;
             margin-top: 10px;
         }
-        /* 版权声明 */
         .copyright {
             margin-top: 80px;
             font-size: 14px;
             color: #666;
         }
-        /* 链接样式 */
         a {
             color: #0066cc;
             text-decoration: none;
@@ -155,6 +138,7 @@
     </div>
 </body>
 </html>
+
 
 
 
