@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WATM 通联泰安全模式奖 | Worked All Tai'an Modes Award</title>
-    <style>
+     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
         }
-        /* 纯CSS背景：无线电波纹+泰山蓝渐变，无图片依赖 */
         body {
             max-width: 1000px;
             margin: 0 auto;
@@ -19,44 +18,29 @@
             text-align: center;
             color: #333;
             line-height: 1.8;
-            /* 核心：纯CSS渐变+波纹背景，100%显示 */
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.1) 0%, rgba(255,255,255,0) 70%),
-                linear-gradient(to bottom, #f8f9fa, #e8f4f8);
+            /* 关键修复：使用GitHub Pages的Raw CDN地址（不是blob/仓库地址） */
+            background: url("https://raw.githubusercontent.com/watmham/WATM/main/images/bg2.png") no-repeat center center;
+            background-size: cover;
             background-attachment: fixed;
+            background-color: #f8f8f8;
             position: relative;
         }
-        /* 无线电波纹装饰（纯CSS，无图片） */
-        body::after {
+        /* 遮罩确保文字清晰 */
+        body::before {
             content: "";
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 800px;
-            height: 800px;
-            transform: translate(-50%, -50%);
-            border: 2px solid rgba(52, 152, 219, 0.2);
-            border-radius: 50%;
-            box-shadow: 0 0 0 20px rgba(52, 152, 219, 0.1),
-                        0 0 0 40px rgba(52, 152, 219, 0.05);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
             z-index: -1;
-            animation: wave 20s infinite linear;
         }
-        /* 波纹动画：模拟无线电信号 */
-        @keyframes wave {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-        }
-        /* 标题样式 */
         h1 {
             font-size: 28px;
             margin-bottom: 40px;
             padding-bottom: 15px;
             border-bottom: 1px solid #666;
-            color: #2c3e50;
-            position: relative;
-            z-index: 1;
         }
         h1 .en {
             font-size: 22px;
@@ -65,19 +49,12 @@
             font-weight: normal;
             color: #666;
         }
-        /* 简介样式 */
         .intro {
             font-size: 18px;
             margin-bottom: 50px;
-            color: #34495e;
-            position: relative;
-            z-index: 1;
         }
-        /* 按钮组 */
         .btn-group {
             margin: 20px 0;
-            position: relative;
-            z-index: 1;
         }
         .nav-btn, .download-btn {
             display: inline-block;
@@ -86,13 +63,11 @@
             border-radius: 5px;
             font-size: 18px;
             text-decoration: none;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
         }
         .nav-btn {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            color: #333;
+            background: #f5f5f5;
+            border: 1px solid #ccc;
+            color: #000;
         }
         .download-btn {
             background: #3498db;
@@ -100,31 +75,20 @@
             color: #fff;
             font-weight: bold;
         }
-        .nav-btn:hover {
-            background: #f5f5f5;
-            transform: translateY(-2px);
+        .nav-btn:hover, .download-btn:hover {
+            background: #eee;
+            text-decoration: underline;
         }
-        .download-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        /* 下载提示 */
         .download-tip {
             font-size: 14px;
             color: #666;
             margin-top: 10px;
-            position: relative;
-            z-index: 1;
         }
-        /* 版权声明 */
         .copyright {
             margin-top: 80px;
             font-size: 14px;
             color: #666;
-            position: relative;
-            z-index: 1;
         }
-        /* 链接样式 */
         a {
             color: #0066cc;
             text-decoration: none;
