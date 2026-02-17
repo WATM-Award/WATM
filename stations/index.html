@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>泰安发射电台 | Tai'an Active Stations</title>
     <style>
-        /* 复刻WCSA极简风格，与主页面/规则页统一 */
         * {
             margin: 0;
             padding: 0;
@@ -19,76 +18,85 @@
             color: #333;
             line-height: 1.8;
             font-size: 16px;
+
+            /* 这里就是你的 bg2.png，绝对路径，一定显示 */
+            background: url("https://raw.githubusercontent.com/watmham/WATM/main/images/bg2.png") no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #f8f8f8;
+            position: relative;
+            z-index: 0;
         }
-        /* 返回主页按钮 */
+
+        /* 半透明遮罩，保证文字清晰 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
         .back {
             margin-bottom: 20px;
             display: inline-block;
             color: #0066cc;
             text-decoration: none;
+            position: relative;
+            z-index: 1;
         }
         .back:hover {
             text-decoration: underline;
         }
-        /* 标题样式 */
+
         h1 {
             font-size: 24px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
             border-bottom: 1px solid #666;
+            color: #2c3e50;
+            position: relative;
+            z-index: 1;
         }
         h1 .en {
-            font-size: 22px;
+            font-size: 20px;
             display: block;
-            margin-top: 10px;
+            margin-top: 5px;
             font-weight: normal;
             color: #666;
         }
-        h2 {
-            font-size: 20px;
-            margin: 30px 0 15px;
-            color: #000;
-            text-align: center;
-        }
-        /* 呼号列表样式：分栏展示，清晰易读 */
+
         .station-list {
-            max-width: 600px;
-            margin: 0 auto;
-            columns: 2;
-            gap: 20px;
-            list-style: none;
-            text-align: center;
+            position: relative;
+            z-index: 1;
         }
-        .station-list li {
-            margin-bottom: 8px;
+        .station-item {
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .station-item strong {
             font-size: 18px;
-            font-family: "Courier New", monospace; /* 等宽字体，适配呼号显示 */
+            color: #222;
         }
-        /* 说明文本 */
-        .note {
-            text-align: center;
-            margin-top: 30px;
-            color: #666;
+        .station-item p {
+            margin-top: 5px;
+            color: #333;
         }
+
         .copyright {
             text-align: center;
             margin-top: 50px;
             font-size: 14px;
             color: #666;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        /* 手机端适配：单栏显示 */
-        @media (max-width: 600px) {
-            .station-list {
-                columns: 1;
-            }
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
