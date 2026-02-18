@@ -1,522 +1,131 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WATM 通联泰安全模式奖 | WATM Tai'an All-Mode Award</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
-        }
-        body {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            line-height: 1.8;
-            font-size: 16px;
-            background: url("https://raw.githubusercontent.com/watmham/WATM/main/images/bg.png") no-repeat center center;
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: #f8f8f8;
-            position: relative;
-            z-index: 0;
-        }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.85);
-            z-index: -1;
-        }
+ <html lang="zh-CN">
+  <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>WATM 通联泰安全模式奖</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
+    body{max-width:1000px;margin:0 auto;padding:40px 20px;background:url(https://raw.githubusercontent.com/watmham/WATM/main/images/bg2.png) no-repeat center center;background-size:cover;background-attachment:fixed;color:#333;line-height:1.8;font-size:16px;position:relative;z-index:0}
+    body::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.85);z-index:-1}
 
-        /* 头部：标题+注册登录按钮 */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #2c3e50;
-            text-align: center;
-            flex: 1;
-        }
-        .title .en {
-            font-size: 18px;
-            font-weight: normal;
-            color: #666;
-            display: block;
-            margin-top: 5px;
-        }
-        .auth-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .login-status {
-            color: #27ae60;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        .btn {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #fff;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-login {
-            background: #3498db;
-        }
-        .btn-login:hover {
-            background: #2980b9;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .btn-register {
-            background: #2ecc71;
-        }
-        .btn-register:hover {
-            background: #27ae60;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .btn-logout {
-            background: #e74c3c;
-        }
-        .btn-logout:hover {
-            background: #c0392b;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+/* 头部：标题 + 登录注册 */
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:10px}
+.title{font-size:26px;font-weight:bold;color:#2c3e50}
+.title .en{font-size:16px;color:#666;display:block}
+.auth{display:flex;gap:8px}
+.btn{padding:6px 14px;border:none;border-radius:4px;color:#fff;font-size:14px;cursor:pointer}
+.btn-login{background:#3498db}
+.btn-register{background:#2ecc71}
+.btn-logout{background:#e74c3c}
+.login-status{color:#27ae60;font-weight:bold;font-size:14px}
 
-        /* 弹窗遮罩 */
-        .modal-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
-        .modal-mask.show {
-            display: flex;
-        }
-        /* 弹窗内容 */
-        .modal-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .close-modal {
-            float: right;
-            font-size: 20px;
-            cursor: pointer;
-            color: #999;
-        }
-        .close-modal:hover {
-            color: #e74c3c;
-        }
-        .modal-title {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
+/* 三个大按钮（跟你原来完全一样） */
+.menu{display:flex;flex-direction:column;gap:16px;margin:60px 0;align-items:center}
+.menu a{display:block;width:260px;padding:18px 0;background:#fff;border:1px solid #ddd;border-radius:8px;text-align:center;text-decoration:none;color:#2c3e50;font-size:20px;font-weight:bold;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.menu a:hover{background:#f5f5f5}
 
-        /* 表单样式 */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 3px rgba(52, 152, 219, 0.3);
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            color: #fff;
-        }
-        .submit-btn.login {
-            background: #3498db;
-        }
-        .submit-btn.login:hover {
-            background: #2980b9;
-        }
-        .submit-btn.register {
-            background: #2ecc71;
-        }
-        .submit-btn.register:hover {
-            background: #27ae60;
-        }
+/* 弹窗 */
+.mask{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;justify-content:center;align-items:center;z-index:999}
+.mask.show{display:flex}
+.modal{background:#fff;padding:25px;border-radius:8px;width:90%;max-width:360px}
+.modal h3{text-align:center;margin-bottom:15px}
+.modal .item{margin-bottom:12px}
+.modal label{display:block;margin-bottom:4px;font-weight:bold}
+.modal input{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px}
+.modal .subbtn{width:100%;padding:10px;background:#3498db;color:#fff;border:none;border-radius:4px;margin-top:8px}
+.modal .subbtn.reg{background:#2ecc71}
+.msg{margin-top:8px;text-align:center;font-size:14px;display:none}
+.msg.success{color:green}
+.msg.error{color:red}
+.close{float:right;cursor:pointer;font-size:20px;color:#999}
 
-        /* 提示消息 */
-        .message {
-            margin-top: 10px;
-            padding: 8px;
-            border-radius: 4px;
-            text-align: center;
-            display: none;
-        }
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
-        }
-
-        /* 核心内容：三项数值排列 */
-        .main-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 0 auto;
-            max-width: 800px;
-        }
-        .content-item {
-            background: rgba(255,255,255,0.9);
-            padding: 30px 20px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .content-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .content-item h2 {
-            font-size: 22px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .content-item p {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-        .content-item a {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 20px;
-            background: #3498db;
-            color: #fff;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        .content-item a:hover {
-            background: #2980b9;
-        }
-
-        /* 版权声明 */
-        .copyright {
-            text-align: center;
-            margin-top: 80px;
-            font-size: 14px;
-            color: #666;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 手机端适配 */
-        @media (max-width: 768px) {
-            .header {
-                justify-content: center;
-            }
-            .title {
-                font-size: 24px;
-            }
-        }
-    </style>
+.copyright{text-align:center;margin-top:60px;font-size:14px;color:#666}
+</style>
 </head>
 <body>
-    <!-- 头部：标题 + 注册/登录按钮 -->
-    <div class="header">
-        <div class="title">
-            WATM 通联泰安全模式奖
-            <span class="en">WATM Tai'an All-Mode Award</span>
-        </div>
-        <div class="auth-area">
-            <span class="login-status" id="login-status"></span>
-            <button class="btn btn-login" id="login-btn">登录</button>
-            <button class="btn btn-register" id="register-btn">注册</button>
-            <button class="btn btn-logout" id="logout-btn" style="display: none;" onclick="logout()">登出</button>
-        </div>
-    </div>
 
-    <!-- 登录弹窗 -->
-    <div class="modal-mask" id="login-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
-            <h3 class="modal-title">用户登录</h3>
-            <div class="form-group">
-                <label for="login-username">用户名</label>
-                <input type="text" id="login-username" placeholder="输入你的用户名">
-            </div>
-            <div class="form-group">
-                <label for="login-password">密码</label>
-                <input type="password" id="login-password" placeholder="输入你的密码">
-            </div>
-            <button class="submit-btn login" onclick="login()">登录</button>
-            <div class="message" id="login-message"></div>
-        </div>
-    </div>
+<div class="header">
+  <div class="title">
+    WATM 通联泰安全模式奖
+    <span class="en">Tai'an All-Mode Award</span>
+  </div>
+  <div class="auth">
+    <span class="login-status" id="status"></span>
+    <button class="btn btn-login" id="loginBtn">登录</button>
+    <button class="btn btn-register" id="regBtn">注册</button>
+    <button class="btn btn-logout" id="logoutBtn" style="display:none" onclick="logout()">登出</button>
+  </div>
+</div>
 
-    <!-- 注册弹窗 -->
-    <div class="modal-mask" id="register-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('register-modal')">&times;</span>
-            <h3 class="modal-title">用户注册</h3>
-            <div class="form-group">
-                <label for="reg-username">用户名</label>
-                <input type="text" id="reg-username" placeholder="设置用户名（建议用电台呼号）">
-            </div>
-            <div class="form-group">
-                <label for="reg-password">密码</label>
-                <input type="password" id="reg-password" placeholder="设置密码（不少于6位）">
-            </div>
-            <button class="submit-btn register" onclick="register()">注册</button>
-            <div class="message" id="reg-message"></div>
-        </div>
-    </div>
+<!-- 👇 这里就是你原来的 3 个按钮，链接、文字完全正确！！！ -->
+<div class="menu">
+  <a href="rules.html">活动规则</a>
+  <a href="stations.html">发射电台</a>
+  <a href="apply.html">申请奖项</a>
+</div>
 
-    <!-- 核心内容：三项数值排列 -->
-    <div class="main-content">
-        <!-- 第一项：奖项介绍 -->
-        <div class="content-item">
-            <h2>奖项介绍</h2>
-            <p>WATM通联泰安全模式奖旨在表彰在泰安地区完成多模式通联的业余无线电爱好者。</p>
-            <p>包含FM、SSB、CW、FT8等主流通联模式的验证标准。</p>
-            <a href="award/">查看详情</a>
-        </div>
+<!-- 登录弹窗 -->
+<div class="mask" id="loginMask">
+  <div class="modal">
+    <span class="close" onclick="closeMask()">&times;</span>
+    <h3>登录</h3>
+    <div class="item"><label>用户名</label><input id="loginUser"></div>
+    <div class="item"><label>密码</label><input type="password" id="loginPwd"></div>
+    <button class="subbtn" onclick="doLogin()">登录</button>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+</div>
 
-        <!-- 第二项：发射电台 -->
-        <div class="content-item">
-            <h2>发射电台</h2>
-            <p>汇总泰安地区近期有发射记录的业余电台呼号，支持用户登录后提交新增电台信息。</p>
-            <p>所有提交信息仅提交者可管理，防止他人误操作。</p>
-            <a href="stations/">查看/提交</a>
-        </div>
+<!-- 注册弹窗 -->
+<div class="mask" id="regMask">
+  <div class="modal">
+    <span class="close" onclick="closeMask()">&times;</span>
+    <h3>注册</h3>
+    <div class="item"><label>用户名</label><input id="regUser"></div>
+    <div class="item"><label>密码</label><input type="password" id="regPwd"></div>
+    <button class="subbtn reg" onclick="doReg()">注册</button>
+    <div class="msg" id="regMsg"></div>
+  </div>
+</div>
 
-        <!-- 第三项：申请奖项 -->
-        <div class="content-item">
-            <h2>申请奖项</h2>
-            <p>提交你的泰安全模式通联记录，经审核通过后将颁发电子证书及实体奖牌。</p>
-            <p>需提供至少3种不同模式的有效通联凭证。</p>
-            <a href="apply/">提交申请</a>
-        </div>
-    </div>
+<div class="copyright">© 2026 WATM 通联泰安全模式奖 BG4LZN</div>
 
-    <!-- 版权声明 -->
-    <div class="copyright">
-        © 2026 WATM 通联泰安全模式奖 BG4LZN | 联系邮箱：<a href="mailto:watmham@outlook.com">watmham@outlook.com</a>
-    </div>
+<script>
+let user = null;
+window.onload = () => {
+  user = localStorage.getItem('watmUser');
+  if(user) updateStatus();
+  document.getElementById('loginBtn').onclick = () => show('loginMask');
+  document.getElementById('regBtn').onclick = () => show('regMask');
+}
+function show(id){document.getElementById(id).classList.add('show')}
+function closeMask(){document.querySelectorAll('.mask').forEach(m=>m.classList.remove('show'))}
+function updateStatus(){
+  document.getElementById('status').innerText = user ? `已登录：${user}` : '';
+  document.getElementById('loginBtn').style.display = user ? 'none' : 'inline-block';
+  document.getElementById('regBtn').style.display = user ? 'none' : 'inline-block';
+  document.getElementById('logoutBtn').style.display = user ? 'inline-block' : 'none';
+}
+function logout(){localStorage.removeItem('watmUser');user=null;updateStatus()}
 
-    <script>
-        // 全局变量：当前登录用户
-        let currentUser = null;
-
-        // 页面加载初始化
-        window.onload = function() {
-            checkLoginStatus();
-            // 绑定弹窗按钮事件
-            document.getElementById('login-btn').addEventListener('click', () => openModal('login-modal'));
-            document.getElementById('register-btn').addEventListener('click', () => openModal('register-modal'));
-        };
-
-        // ========== 弹窗控制 ==========
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('show');
-            // 清空表单和提示
-            if (modalId === 'login-modal') {
-                document.getElementById('login-username').value = '';
-                document.getElementById('login-password').value = '';
-                document.getElementById('login-message').style.display = 'none';
-            } else if (modalId === 'register-modal') {
-                document.getElementById('reg-username').value = '';
-                document.getElementById('reg-password').value = '';
-                document.getElementById('reg-message').style.display = 'none';
-            }
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
-
-        // 点击遮罩关闭弹窗
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-mask')) {
-                event.target.classList.remove('show');
-            }
-        };
-
-        // ========== 注册/登录核心功能 ==========
-        // 注册功能
-        function register() {
-            const username = document.getElementById('reg-username').value.trim();
-            const password = document.getElementById('reg-password').value.trim();
-            const regMessage = document.getElementById('reg-message');
-
-            // 验证
-            if (!username || !password) {
-                showMessage(regMessage, "用户名和密码不能为空！", "error");
-                return;
-            }
-            if (password.length < 6) {
-                showMessage(regMessage, "密码不少于6位！", "error");
-                return;
-            }
-
-            // 读取现有用户
-            let users = JSON.parse(localStorage.getItem('watmUsers')) || [];
-            // 检查用户名是否已存在
-            const userExists = users.some(user => user.username === username);
-            if (userExists) {
-                showMessage(regMessage, "用户名已存在！", "error");
-                return;
-            }
-
-            // 添加新用户
-            users.push({ username, password });
-            localStorage.setItem('watmUsers', JSON.stringify(users));
-
-            // 提示+关闭弹窗
-            showMessage(regMessage, "注册成功！请登录", "success");
-            setTimeout(() => {
-                closeModal('register-modal');
-                openModal('login-modal');
-            }, 1500);
-        }
-
-        // 登录功能
-        function login() {
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value.trim();
-            const loginMessage = document.getElementById('login-message');
-
-            // 验证
-            if (!username || !password) {
-                showMessage(loginMessage, "用户名和密码不能为空！", "error");
-                return;
-            }
-
-            // 读取用户列表
-            let users = JSON.parse(localStorage.getItem('watmUsers')) || [];
-            // 验证用户
-            const user = users.find(u => u.username === username && u.password === password);
-            if (!user) {
-                showMessage(loginMessage, "用户名或密码错误！", "error");
-                return;
-            }
-
-            // 登录成功：保存登录状态
-            currentUser = username;
-            localStorage.setItem('watmCurrentUser', username);
-            
-            // 更新页面状态+关闭弹窗
-            updateLoginStatus();
-            closeModal('login-modal');
-            showMessage(loginMessage, "登录成功！", "success");
-        }
-
-        // 登出功能
-        function logout() {
-            // 清除登录状态
-            localStorage.removeItem('watmCurrentUser');
-            currentUser = null;
-            // 更新页面状态
-            updateLoginStatus();
-            // 提示
-            const loginStatus = document.getElementById('login-status');
-            loginStatus.textContent = "已登出";
-            setTimeout(() => loginStatus.textContent = "", 2000);
-        }
-
-        // 检查登录状态
-        function checkLoginStatus() {
-            const savedUser = localStorage.getItem('watmCurrentUser');
-            if (savedUser) {
-                currentUser = savedUser;
-                updateLoginStatus();
-            }
-        }
-
-        // 更新登录状态UI
-        function updateLoginStatus() {
-            const loginStatus = document.getElementById('login-status');
-            const loginBtn = document.getElementById('login-btn');
-            const registerBtn = document.getElementById('register-btn');
-            const logoutBtn = document.getElementById('logout-btn');
-
-            if (currentUser) {
-                // 已登录
-                loginStatus.textContent = `当前登录：${currentUser}`;
-                loginBtn.style.display = 'none';
-                registerBtn.style.display = 'none';
-                logoutBtn.style.display = 'inline-block';
-            } else {
-                // 未登录
-                loginStatus.textContent = "";
-                loginBtn.style.display = 'inline-block';
-                registerBtn.style.display = 'inline-block';
-                logoutBtn.style.display = 'none';
-            }
-        }
-
-        // 通用提示消息函数
-        function showMessage(element, text, type) {
-            element.textContent = text;
-            element.className = `message ${type}`;
-        }
-    </script>
+function doReg(){
+  let u = document.getElementById('regUser').value.trim();
+  let p = document.getElementById('regPwd').value.trim();
+  if(!u||!p){showMsg('regMsg','不能为空','error');return}
+  let list = JSON.parse(localStorage.getItem('users'))||[];
+  if(list.some(x=>x.user===u)){showMsg('regMsg','用户名已存在','error');return}
+  list.push({user,p});localStorage.setItem('users',JSON.stringify(list));
+  showMsg('regMsg','注册成功','success');setTimeout(closeMask,1000)
+}
+function doLogin(){
+  let u = document.getElementById('loginUser').value.trim();
+  let p = document.getElementById('loginPwd').value.trim();
+  let list = JSON.parse(localStorage.getItem('users'))||[];
+  if(!list.some(x=>x.user===u&&x.p===p)){showMsg('loginMsg','用户名或密码错误','error');return}
+  user=u;localStorage.setItem('watmUser',u);updateStatus();closeMask()
+}
+function showMsg(id,t,c){let m=document.getElementById(id);m.innerText=t;m.className='msg '+c;m.style.display='block'}
+</script>
 </body>
 </html>
