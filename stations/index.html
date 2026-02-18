@@ -381,45 +381,8 @@
 
     <!-- 核心功能JS -->
     <script>
-        // 全局变量：当前登录用户
-        let currentUser = null;
+      
 
-        // 页面加载时初始化
-        window.onload = function() {
-            // 检查是否已登录
-            checkLoginStatus();
-            // 加载电台列表
-            loadStations();
-        };
-
-        // ========== 登录状态检查 ==========
-        function checkLoginStatus() {
-            const savedUser = localStorage.getItem('watmCurrentUser');
-            const notLoginTip = document.getElementById('not-login-tip');
-            const submitForm = document.getElementById('submit-form');
-
-            if (savedUser) {
-                // 已登录
-                currentUser = savedUser;
-                notLoginTip.style.display = 'none'; // 隐藏未登录提示
-                submitForm.classList.add('show'); // 显示提交表单
-            } else {
-                // 未登录
-                currentUser = null;
-                notLoginTip.style.display = 'block'; // 显示未登录提示
-                submitForm.classList.remove('show'); // 隐藏提交表单
-            }
-        }
-
-        // ========== 电台提交/管理核心功能 ==========
-        // 提交电台信息（仅登录用户可提交）
-        function submitStation() {
-            // 二次检查登录状态
-            if (!currentUser) {
-                alert("请先登录！| Please login first!");
-                window.location.href = "../"; // 跳回主页
-                return;
-            }
 
             const callsign = document.getElementById('callsign').value.trim();
             const location = document.getElementById('location').value.trim() || "泰安市（未指定具体区域）";
