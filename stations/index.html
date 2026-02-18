@@ -201,10 +201,10 @@
             text-align: center;
         }
 
-        /* 清空按钮 */
+        /* 清空按钮（无数据时隐藏） */
         .clear-btn {
             margin: 20px auto 0;
-            display: block;
+            display: none; /* 默认隐藏 */
             padding: 8px 20px;
             background: #e74c3c;
             color: #fff;
@@ -212,6 +212,9 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+        }
+        .clear-btn.show {
+            display: block; /* 有数据时显示 */
         }
         .clear-btn:hover {
             background: #c0392b;
@@ -258,15 +261,15 @@
         <h2>提交你的电台信息 | Submit Your Station Info</h2>
         <div class="form-group">
             <label for="callsign">电台呼号 * | Station Call Sign *</label>
-            <input type="text" id="callsign" placeholder="例如：BG4LZN、BA4IHB" required>
+            <input type="text" id="callsign" placeholder="例如：BG4LZN" required>
         </div>
         <div class="form-group">
             <label for="location">位置 | Location</label>
-            <input type="text" id="location" placeholder="例如：泰安市泰山区、新泰市">
+            <input type="text" id="location" placeholder="例如：泰安市泰山区">
         </div>
         <div class="form-group">
             <label for="modes">通联模式 | Communication Modes</label>
-            <input type="text" id="modes" placeholder="例如：FM/SSB/CW/FT8、仅FM">
+            <input type="text" id="modes" placeholder="例如：FM/SSB/CW/FT8">
         </div>
         <div class="form-group">
             <label for="notes">备注 | Notes</label>
@@ -276,55 +279,47 @@
         <div class="message" id="message"></div>
     </div>
     
-    <!-- 用户提交的电台列表（自动两列） -->
-    <h2>用户提交的发射电台 | User-Submitted Active Stations</h2>
-    <div id="stationContainer" class="two-col-grid">
-        <!-- 无提交数据时显示默认示例 -->
-        <div class="station-item">
-            <strong>BG4LZN</strong>
-            <div class="info">位置：泰安市</div>
-            <div class="info">模式：FM / SSB / CW / FT8</div>
-            <span class="time">默认示例 | Default Example</span>
-        </div>
-    </div>
-    <button class="clear-btn" onclick="clearAllStations()">清空提交列表 | Clear Submitted List</button>
+    <!-- 用户提交的电台列表（无数据时完全隐藏） -->
+    <h2 id="submittedTitle" style="display: none;">用户提交的发射电台 | User-Submitted Active Stations</h2>
+    <div id="stationContainer" class="two-col-grid"></div>
+    <button id="clearBtn" class="clear-btn" onclick="clearAllStations()">清空提交列表 | Clear Submitted List</button>
 
-    <!-- 泰安在册电台呼号 | 已100%核对正确 -->
-<h2>泰安在册电台呼号 | Registered Station Call Signs in Tai'an</h2>
-<div class="two-col-grid">
-    <div class="callsign-item">BA4IHB</div>
-    <div class="callsign-item">BA4III</div>
-    <div class="callsign-item">BA4JAE</div>
-    <div class="callsign-item">BA4JBN</div>
-    <div class="callsign-item">BA4JBU</div>
-    <div class="callsign-item">BA4JFO</div>
-    <div class="callsign-item">BA4JUN</div>
-    <div class="callsign-item">BD4JK</div>
-    <div class="callsign-item">BD4LG</div>
-    <div class="callsign-item">BD4NW</div>
-    <div class="callsign-item">BG4JPO</div>
-    <div class="callsign-item">BG4JUR</div>
-    <div class="callsign-item">BG4JUS</div>
-    <div class="callsign-item">BG4JUT</div>
-    <div class="callsign-item">BG4JUV</div>
-    <div class="callsign-item">BG4LZM</div>
-    <div class="callsign-item">BG4LZN</div>
-    <div class="callsign-item">BG4LZO</div>
-    <div class="callsign-item">BG4LZT</div>
-    <div class="callsign-item">BG4LZV</div>
-    <div class="callsign-item">BH4OBW</div>
-    <div class="callsign-item">BI4IWX</div>
-    <div class="callsign-item">BI4IXA</div>
-    <div class="callsign-item">BI4JKW</div>
-    <div class="callsign-item">BI4JWG</div>
-    <div class="callsign-item">BI4LHS</div>
-    <div class="callsign-item">BI4LQH</div>
-    <div class="callsign-item">BI4MPY</div>
-    <div class="callsign-item">BI4NCA</div>
-    <div class="callsign-item">BI4PID</div>
-    <div class="callsign-item">BI4PIH</div>
-    <div class="callsign-item">BI4PUM</div>
-</div>
+    <!-- 静态在册呼号列表（100%核对正确+自动两列） -->
+    <h2>泰安在册电台呼号 | Registered Station Call Signs in Tai'an</h2>
+    <div class="two-col-grid">
+        <div class="callsign-item">BA4IHB</div>
+        <div class="callsign-item">BA4III</div>
+        <div class="callsign-item">BA4JAE</div>
+        <div class="callsign-item">BA4JBN</div>
+        <div class="callsign-item">BA4JBU</div>
+        <div class="callsign-item">BA4JFO</div>
+        <div class="callsign-item">BA4JUN</div>
+        <div class="callsign-item">BD4JK</div>
+        <div class="callsign-item">BD4LG</div>
+        <div class="callsign-item">BD4NW</div>
+        <div class="callsign-item">BG4JPO</div>
+        <div class="callsign-item">BG4JUR</div>
+        <div class="callsign-item">BG4JUS</div>
+        <div class="callsign-item">BG4JUT</div>
+        <div class="callsign-item">BG4JUV</div>
+        <div class="callsign-item">BG4LZM</div>
+        <div class="callsign-item">BG4LZN</div>
+        <div class="callsign-item">BG4LZO</div>
+        <div class="callsign-item">BG4LZT</div>
+        <div class="callsign-item">BG4LZV</div>
+        <div class="callsign-item">BH4OBW</div>
+        <div class="callsign-item">BI4IWX</div>
+        <div class="callsign-item">BI4IXA</div>
+        <div class="callsign-item">BI4JKW</div>
+        <div class="callsign-item">BI4JWG</div>
+        <div class="callsign-item">BI4LHS</div>
+        <div class="callsign-item">BI4LQH</div>
+        <div class="callsign-item">BI4MPY</div>
+        <div class="callsign-item">BI4NCA</div>
+        <div class="callsign-item">BI4PID</div>
+        <div class="callsign-item">BI4PIH</div>
+        <div class="callsign-item">BI4PUM</div>
+    </div>
 
     <!-- 说明文本 -->
     <div class="note">
@@ -386,16 +381,22 @@
             }, 3000);
         }
 
-        // 加载电台列表（自动两列显示）
+        // 加载电台列表（无数据时完全隐藏标题和清空按钮）
         function loadStations() {
             const localStations = JSON.parse(localStorage.getItem('watmStations')) || [];
             const container = document.getElementById('stationContainer');
+            const submittedTitle = document.getElementById('submittedTitle');
+            const clearBtn = document.getElementById('clearBtn');
             
             // 清空容器
             container.innerHTML = "";
 
-            // 显示本地提交的电台（自动两列）
+            // 有提交数据时显示列表、标题、清空按钮
             if (localStations.length > 0) {
+                submittedTitle.style.display = "block";
+                clearBtn.classList.add("show");
+                
+                // 显示本地提交的电台（自动两列）
                 localStations.forEach(station => {
                     const item = document.createElement('div');
                     item.className = 'station-item';
@@ -409,15 +410,9 @@
                     container.appendChild(item);
                 });
             } else {
-                // 无本地数据时显示默认示例
-                container.innerHTML = `
-                    <div class="station-item">
-                        <strong>BG4LZN</strong>
-                        <div class="info">位置：泰安市</div>
-                        <div class="info">模式：FM / SSB / CW / FT8</div>
-                        <span class="time">默认示例 | Default Example</span>
-                    </div>
-                `;
+                // 无数据时隐藏标题、清空按钮，容器为空
+                submittedTitle.style.display = "none";
+                clearBtn.classList.remove("show");
             }
         }
 
