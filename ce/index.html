@@ -26,29 +26,40 @@
 </head>
 <body>
 
-<audio id="bg-music" autoplay muted loop playsinline>
-    <source src="https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1" type="audio/mpeg">
-    你的浏览器不支持音频播放
-
+<audio id="bg-music" loop playsinline>
 
 <script>
     const audio = document.getElementById('bg-music');
+    audio.src = "https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1";
+    audio.muted = true;    // 一开始静音，才能自动播放
+    audio.loop = true;
 
-    // 页面一加载就尝试播放（静音自动播）
-    audio.play().catch(err => {
-        console.log('自动播放被浏览器限制:', err);
-    });
-
-    // 用户点击页面 → 取消静音，正常播放
-    function unlockSound() {
-        audio.muted = false;
-        // 只执行一次
-        document.removeEventListener('click', unlockSound);
-        document.removeEventListener('touchstart', unlockSound);
+    // 自动播放（静音）
+    async function autoPlay() {
+        try {
+            await audio.play();
+            console.log("✅ 静音自动播放成功");
+        } catch (err) {
+            console.log("❌ 自动播放被限制", err);
+        }
     }
 
-    document.addEventListener('click', unlockSound);
-    document.addEventListener('touchstart', unlockSound);
+    // 用户交互后解锁声音
+    function unlock() {
+        audio.muted = false;
+        audio.volume = 1;
+        
+        // 防止没在播
+        if (audio.paused) audio.play();
+        
+        document.removeEventListener('click', unlock);
+        document.removeEventListener('touchstart', unlock);
+    }
+
+    // 启动
+    autoPlay();
+    document.addEventListener('click', unlock);
+    document.addEventListener('touchstart', unlock);
 </script>
 
 </body>
