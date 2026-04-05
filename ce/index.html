@@ -17,27 +17,39 @@
             background-size: cover;
             background-attachment: fixed;
             overflow: hidden;
+            cursor: pointer;
         }
         audio {
-            display: none; /* 隐藏播放器，后台循环 */
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- 音频：强制无限循环，解决浏览器循环断点问题 -->
-    <audio id="bg-music" autoplay muted playsinline>
-        <source src="https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1" type="audio/mpeg">
-        你的浏览器不支持音频播放
-    </audio>
 
-    <script>
-        // 监听音频播放结束事件，立即重新播放（确保无缝循环）
-        const audio = document.getElementById('bg-music');
-        audio.loop = true; // 双重保障：标签属性 + JS强制循环
-        audio.addEventListener('ended', function() {
-            this.currentTime = 0; // 重置播放进度到开头
-            this.play(); // 立即重新播放
-        });
-    </script>
+<audio id="bg-music" autoplay muted loop playsinline>
+    <source src="https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1" type="audio/mpeg">
+    你的浏览器不支持音频播放
+
+
+<script>
+    const audio = document.getElementById('bg-music');
+
+    // 页面一加载就尝试播放（静音自动播）
+    audio.play().catch(err => {
+        console.log('自动播放被浏览器限制:', err);
+    });
+
+    // 用户点击页面 → 取消静音，正常播放
+    function unlockSound() {
+        audio.muted = false;
+        // 只执行一次
+        document.removeEventListener('click', unlockSound);
+        document.removeEventListener('touchstart', unlockSound);
+    }
+
+    document.addEventListener('click', unlockSound);
+    document.addEventListener('touchstart', unlockSound);
+</script>
+
 </body>
 </html>
