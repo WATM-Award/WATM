@@ -18,48 +18,64 @@
             background-attachment: fixed;
             overflow: hidden;
             cursor: pointer;
+            position: relative;
         }
         audio {
             display: none;
+        }
+        /* 提示文字样式 */
+        #tip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 14px;
+            background: rgba(0,0,0,0.4);
+            padding: 6px 12px;
+            border-radius: 8px;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
 <audio id="bg-music" loop playsinline>
+<div id="tip">🎵 背景音乐加载中，点击页面播放声音</div>
 
 <script>
     const audio = document.getElementById('bg-music');
-    audio.src = "https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1";
-    audio.muted = true;    // 一开始静音，才能自动播放
-    audio.loop = true;
+    const tip = document.getElementById('tip');
 
-    // 自动播放（静音）
+    audio.src = "https://tiengdong.com/wp-content/uploads/your-phone-linging-ringtone-th-www_tiengdong_com.mp3?_=1";
+    audio.muted = true;
+    audio.loop = true;
+    audio.volume = 1;
+
+    // 自动静音播放
     async function autoPlay() {
         try {
             await audio.play();
-            console.log("✅ 静音自动播放成功");
+            tip.textContent = "🎵 已自动播放（静音），点击页面出声";
         } catch (err) {
-            console.log("❌ 自动播放被限制", err);
+            tip.textContent = "🎵 点击页面开始播放音乐";
+            console.log("自动播放被限制：", err);
         }
     }
 
-    // 用户交互后解锁声音
-    function unlock() {
+    // 点击解锁声音
+    function unlockSound() {
         audio.muted = false;
-        audio.volume = 1;
-        
-        // 防止没在播
         if (audio.paused) audio.play();
+        tip.textContent = "🎵 背景音乐播放中";
         
-        document.removeEventListener('click', unlock);
-        document.removeEventListener('touchstart', unlock);
+        document.removeEventListener('click', unlockSound);
+        document.removeEventListener('touchstart', unlockSound);
     }
 
-    // 启动
     autoPlay();
-    document.addEventListener('click', unlock);
-    document.addEventListener('touchstart', unlock);
+    document.addEventListener('click', unlockSound);
+    document.addEventListener('touchstart', unlockSound);
 </script>
 
 </body>
